@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Nikita ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb,#a18cd1);
+    overflow:hidden;
+}
+
+/* 3D Flip Card */
+.card{
+    width:350px;
+    height:500px;
+    perspective:1200px;
+    z-index:10;
+}
+
+.inner{
+    width:100%;
+    height:100%;
+    position:relative;
+    transform-style:preserve-3d;
+    transition:1s;
+}
+
+.card:hover .inner{
+    transform:rotateY(180deg);
+}
+
+.front,
+.back{
+    position:absolute;
+    width:100%;
+    height:100%;
+    border-radius:20px;
+    backface-visibility:hidden;
+    overflow:hidden;
+    box-shadow:0 15px 35px rgba(0,0,0,.3);
+}
+
+.front{
+    background:linear-gradient(135deg,#ff4b91,#ff80ab);
+    color:#fff;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.front h1{
+    font-size:38px;
+}
+
+.front h2{
+    margin:10px 0;
+    font-size:30px;
+}
+
+.front p{
+    margin-top:15px;
+    font-size:18px;
+}
+
+.heart{
+    font-size:70px;
+    animation:beat 1s infinite;
+}
+
+@keyframes beat{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.2);}
+}
+
+.back{
+    background:#fff;
+    transform:rotateY(180deg);
+    padding:25px;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.back h2{
+    color:#ff1493;
+    margin-bottom:15px;
+}
+
+.back p{
+    color:#555;
+    font-size:17px;
+    line-height:1.8;
+}
+
+.date{
+    margin-top:20px;
+    color:#ff1493;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.footer{
+    margin-top:25px;
+    font-size:22px;
+    color:#ff1493;
+    font-weight:bold;
+}
+
+/* Confetti */
+.confetti{
+    position:fixed;
+    width:8px;
+    height:8px;
+    animation:fall 6s linear infinite;
+}
+
+@keyframes fall{
+0%{
+transform:translateY(-100vh) rotate(0deg);
+opacity:1;
+}
+100%{
+transform:translateY(100vh) rotate(720deg);
+opacity:0;
+}
+}
+
+/* Floating Hearts */
+.float-heart{
+position:fixed;
+bottom:-50px;
+animation:float linear infinite;
+z-index:1;
+}
+
+@keyframes float{
+0%{
+transform:translateY(0);
+opacity:0;
+}
+20%{
+opacity:1;
+}
+100%{
+transform:translateY(-120vh) rotate(360deg);
+opacity:0;
+}
+}
+
+/* Sparkles */
+.sparkle{
+position:fixed;
+animation:twinkle 2s infinite;
+z-index:0;
+}
+
+@keyframes twinkle{
+0%,100%{
+opacity:.3;
+transform:scale(1);
+}
+50%{
+opacity:1;
+transform:scale(1.5);
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+<div class="inner">
+
+<!-- Front -->
+<div class="front">
+
+<div class="heart">🎂💖</div>
+
+<h1>Happy Birthday</h1>
+
+<h2>Nikita</h2>
+
+<p>Hover To Open Your Surprise ✨</p>
+
+</div>
+
+<!-- Back -->
+<div class="back">
+
+<h2>Dear Nikita ❤️</h2>
+
+<p>
+Happy Birthday to my sweetest Goti Sister! 💖<br><br>
+
+Wishing you a life full of happiness, love, success, and beautiful memories.
+May your smile always shine brighter than the stars, and may every dream you
+have come true. 🌸✨<br><br>
+</p>
+
+<div class="date">
+🎈 DOB: 30 October 2008 🎈
+</div>
+
+<div class="footer">
+With Lots of Love ❤️
+</div>
+
+</div>
+
+</div>
+</div>
+
+<script>
+
+/* Confetti */
+for(let i=0;i<100;i++){
+
+let c=document.createElement("div");
+
+c.className="confetti";
+
+c.style.left=Math.random()*100+"vw";
+
+c.style.background=`hsl(${Math.random()*360},100%,60%)`;
+
+c.style.animationDelay=Math.random()*6+"s";
+
+document.body.appendChild(c);
+
+}
+
+/* Floating Hearts */
+for(let i=0;i<30;i++){
+
+let h=document.createElement("div");
+
+h.className="float-heart";
+
+h.innerHTML="💖";
+
+h.style.left=Math.random()*100+"vw";
+
+h.style.fontSize=(20+Math.random()*25)+"px";
+
+h.style.animationDuration=(5+Math.random()*6)+"s";
+
+h.style.animationDelay=Math.random()*5+"s";
+
+document.body.appendChild(h);
+
+}
+
+/* Sparkles */
+for(let i=0;i<150;i++){
+
+let s=document.createElement("div");
+
+s.className="sparkle";
+
+s.innerHTML="✨";
+
+s.style.left=Math.random()*100+"vw";
+
+s.style.top=Math.random()*100+"vh";
+
+s.style.fontSize=(8+Math.random()*12)+"px";
+
+s.style.animationDuration=(1+Math.random()*2)+"s";
+
+document.body.appendChild(s);
+
+}
+
+</script>
+
+</body>
+</html>
