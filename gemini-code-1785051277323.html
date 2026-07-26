@@ -1,0 +1,486 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Nikita ✨💖</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at 50% 50%, #ffdde1 0%, #ee9ca7 45%, #a1c4fd 100%);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Ambient Glow Spheres */
+        .glow-sphere {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.6;
+            z-index: 0;
+            animation: pulseGlow 8s infinite alternate ease-in-out;
+        }
+
+        .glow-1 {
+            width: 380px;
+            height: 380px;
+            background: #ff9a9e;
+            top: 5%;
+            left: 5%;
+        }
+
+        .glow-2 {
+            width: 420px;
+            height: 420px;
+            background: #fecfef;
+            bottom: 5%;
+            right: 5%;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.2) translate(30px, -20px); }
+        }
+
+        /* Music Button */
+        .music-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #d63384;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        /* 3D Perspective Card Wrapper */
+        .card-wrapper {
+            perspective: 1000px;
+            z-index: 10;
+        }
+
+        /* 3D Card Container */
+        .card-container {
+            width: 370px;
+            height: 570px;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card-container.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        /* Card Front & Back Base */
+        .front, .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+            backface-visibility: hidden;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(255, 105, 180, 0.3), 0 10px 25px rgba(0,0,0,0.08);
+            border: 1.5px solid rgba(255, 255, 255, 0.75);
+        }
+
+        /* Front Side Styling */
+        .front {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+            color: #4a2e35;
+        }
+
+        .crown-icon {
+            font-size: 40px;
+            margin-bottom: 5px;
+            animation: floatCrown 3s infinite ease-in-out;
+        }
+
+        @keyframes floatCrown {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(6deg); }
+        }
+
+        .cake-emoji {
+            font-size: 68px;
+            margin: 15px 0;
+            filter: drop-shadow(0 10px 18px rgba(255, 105, 180, 0.4));
+            animation: heartbeat 1.5s infinite ease-in-out;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .front h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: #d63384;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .front h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 54px;
+            color: #800020;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+            line-height: 1.1;
+        }
+
+        .front .sub-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+            font-weight: 700;
+            color: #ff1493;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        .tap-hint {
+            margin-top: 25px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #721c24;
+            background: rgba(255, 255, 255, 0.75);
+            padding: 9px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 182, 193, 0.8);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            animation: pulseHint 2s infinite;
+        }
+
+        @keyframes pulseHint {
+            0%, 100% { opacity: 0.85; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        /* Back Side Styling */
+        .back {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+            transform: rotateY(180deg);
+            padding: 30px 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            color: #333;
+        }
+
+        .back-header h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 38px;
+            color: #ff1493;
+            margin-bottom: 2px;
+        }
+
+        .polaroid-frame {
+            width: 140px;
+            height: 140px;
+            background: #fff;
+            padding: 8px 8px 18px 8px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+            transform: rotate(-3deg);
+            transition: transform 0.3s ease;
+            margin: 8px 0;
+        }
+
+        .polaroid-frame:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .polaroid-frame img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .message-body {
+            font-size: 13.5px;
+            line-height: 1.7;
+            color: #4a4a4a;
+            margin: 8px 0;
+            font-weight: 400;
+        }
+
+        .highlight-text {
+            color: #d63384;
+            font-weight: 600;
+        }
+
+        .dob-badge {
+            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+            color: white;
+            padding: 7px 18px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(255, 117, 140, 0.35);
+        }
+
+        .footer-love {
+            font-family: 'Playfair Display', serif;
+            font-size: 17px;
+            font-style: italic;
+            color: #800020;
+            font-weight: 600;
+        }
+
+        /* Particles */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(105vh) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            15% { opacity: 0.9; }
+            85% { opacity: 0.9; }
+            100% {
+                transform: translateY(-10vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Working Birthday Song Stream -->
+    <audio id="bgAudio" loop preload="auto">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=happy-birthday-115310.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Music Toggle Button -->
+    <div class="music-btn" id="musicBtn">
+        <span id="musicIcon">🎵</span>
+        <span id="musicText">Play Song</span>
+    </div>
+
+    <!-- Glowing Backdrops -->
+    <div class="glow-sphere glow-1"></div>
+    <div class="glow-sphere glow-2"></div>
+
+    <!-- 3D Parallax Card Wrapper -->
+    <div class="card-wrapper" id="cardWrapper">
+        <div class="card-container" id="cardContainer">
+            <div class="card-inner">
+
+                <!-- Front Side -->
+                <div class="front">
+                    <div class="crown-icon">👑</div>
+                    <h3>Wishing You The Best</h3>
+                    <h1>Happy Birthday</h1>
+                    <div class="sub-name">Nikita 💖</div>
+                    <div class="cake-emoji">🎂✨</div>
+                    <div class="tap-hint">TAP / CLICK TO OPEN SURPRISE 🎁</div>
+                </div>
+
+                <!-- Back Side -->
+                <div class="back">
+                    <div class="back-header">
+                        <h2>Dear Nikita ❤️</h2>
+                    </div>
+
+                    <div class="polaroid-frame">
+                        <img src="https://images.unsplash.com/photo-1513201099705-a9746e1e201f?auto=format&fit=crop&q=80&w=400" alt="Birthday Memory">
+                    </div>
+
+                    <div class="message-body">
+                        Happy Birthday to my sweetest sister! 💖<br>
+                        May your life be full of <span class="highlight-text">endless joy, love & success</span>.<br>
+                        May your smile always shine brighter than the stars! 🌸✨
+                    </div>
+
+                    <div class="dob-badge">
+                        🎈 30 OCTOBER 2008 🎈
+                    </div>
+
+                    <div class="footer-love">
+                        ❤️
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cardContainer = document.getElementById('cardContainer');
+        const card = document.getElementById('cardContainer');
+        const audio = document.getElementById('bgAudio');
+        const musicBtn = document.getElementById('musicBtn');
+        const musicIcon = document.getElementById('musicIcon');
+        const musicText = document.getElementById('musicText');
+
+        let isPlaying = false;
+
+        // 1. Parallax 3D Hover Effect
+        document.addEventListener('mousemove', (e) => {
+            const { innerWidth, innerHeight } = window;
+            const x = (e.clientX - innerWidth / 2) / 25;
+            const y = (e.clientY - innerHeight / 2) / 25;
+
+            card.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+        });
+
+        document.addEventListener('mouseleave', () => {
+            card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+        });
+
+        // 2. Play Audio Helper
+        function playSong() {
+            audio.play().then(() => {
+                isPlaying = true;
+                musicIcon.textContent = '⏸️';
+                musicText.textContent = 'Pause Song';
+            }).catch(err => {
+                console.log("Browser user gesture requirement:", err);
+            });
+        }
+
+        function pauseSong() {
+            audio.pause();
+            isPlaying = false;
+            musicIcon.textContent = '🎵';
+            musicText.textContent = 'Play Song';
+        }
+
+        // Toggle Music Button
+        musicBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (isPlaying) {
+                pauseSong();
+            } else {
+                playSong();
+            }
+        });
+
+        // 3. Multi-Stage Firework Confetti Burst
+        function launchFireworks() {
+            if (typeof confetti !== 'function') return;
+
+            const duration = 3.5 * 1000;
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 35, spread: 360, ticks: 70, zIndex: 99 };
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                const particleCount = 60 * (timeLeft / duration);
+                
+                confetti(Object.assign({}, defaults, { 
+                    particleCount, 
+                    origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+                    colors: ['#ff758c', '#ff7eb3', '#ffd700', '#ffffff', '#a1c4fd']
+                }));
+                confetti(Object.assign({}, defaults, { 
+                    particleCount, 
+                    origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+                    colors: ['#ff758c', '#ff7eb3', '#ffd700', '#ffffff', '#a1c4fd']
+                }));
+            }, 250);
+        }
+
+        function randomInRange(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        // 4. Click Card to Flip & Play Song
+        cardContainer.addEventListener('click', () => {
+            cardContainer.classList.toggle('flipped');
+
+            if (!isPlaying) {
+                playSong();
+            }
+
+            launchFireworks();
+        });
+
+        // 5. Floating Background Symbols
+        const symbols = ['💖', '✨', '🌸', '💕', '⭐', '🎈'];
+        for (let i = 0; i < 35; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+            
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.fontSize = (14 + Math.random() * 22) + 'px';
+            particle.style.animationDuration = (6 + Math.random() * 8) + 's';
+            particle.style.animationDelay = (Math.random() * 5) + 's';
+            
+            document.body.appendChild(particle);
+        }
+    </script>
+</body>
+</html>
