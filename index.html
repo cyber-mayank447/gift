@@ -4,11 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guru Purnima Special - Teachers Tribute Portal</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
+    <!-- Speed Optimization Preconnects -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <!-- Fast Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+
     <style>
         :root {
             --bg-color: #030712;
@@ -58,7 +65,6 @@
             gap: 50px;
         }
 
-        /* Top Header */
         .portal-header {
             text-align: center;
         }
@@ -78,7 +84,6 @@
             letter-spacing: 1px;
         }
 
-        /* HOME PAGE CIRCLES GRID */
         .teachers-circles-container {
             display: flex;
             justify-content: center;
@@ -94,14 +99,15 @@
             flex-direction: column;
             align-items: center;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.25s ease;
             background: none;
             border: none;
             color: inherit;
+            will-change: transform;
         }
 
         .teacher-circle-card:hover {
-            transform: translateY(-10px) scale(1.05);
+            transform: translateY(-8px) scale(1.04);
         }
 
         .circle-avatar {
@@ -114,8 +120,8 @@
             font-size: 2.4rem;
             color: #fff;
             border: 3px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
             background-size: cover;
@@ -124,7 +130,7 @@
 
         .teacher-circle-card:hover .circle-avatar {
             border-color: #38bdf8;
-            box-shadow: 0 0 35px rgba(56, 189, 248, 0.7);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.6);
         }
 
         .circle-name {
@@ -133,7 +139,6 @@
             font-weight: 600;
             color: #e2e8f0;
             text-align: center;
-            transition: color 0.3s ease;
         }
 
         .teacher-circle-card:hover .circle-name {
@@ -147,7 +152,7 @@
             margin-top: 2px;
         }
 
-        /* --- POPUP / MODAL STYLES --- */
+        /* MODAL STYLES */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -155,8 +160,8 @@
             width: 100%;
             height: 100%;
             background: rgba(3, 7, 18, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             z-index: 999;
             display: flex;
             align-items: center;
@@ -164,7 +169,7 @@
             padding: 20px;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.25s ease;
         }
 
         .modal-overlay.active {
@@ -181,15 +186,15 @@
             padding: 30px 35px 35px 35px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
             position: relative;
-            transform: scale(0.8);
-            transition: transform 0.3s ease;
+            transform: scale(0.9);
+            transition: transform 0.25s ease;
+            will-change: transform;
         }
 
         .modal-overlay.active .modal-card {
             transform: scale(1);
         }
 
-        /* Top Bar Layout Inside Card */
         .card-top-bar {
             display: flex;
             align-items: flex-start;
@@ -210,7 +215,6 @@
             text-transform: uppercase;
         }
 
-        /* Right Actions Column (Close TOP, Play Music BOTTOM) */
         .corner-controls {
             display: flex;
             flex-direction: column;
@@ -218,7 +222,6 @@
             gap: 10px;
         }
 
-        /* Close Button TOP */
         .close-btn {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.15);
@@ -228,7 +231,7 @@
             border-radius: 50%;
             font-size: 0.95rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background 0.2s ease, transform 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -240,7 +243,6 @@
             transform: rotate(90deg);
         }
 
-        /* Play Music Box BOTTOM (Compact/Short Icon & Button) */
         .audio-control-box {
             display: flex;
             align-items: center;
@@ -263,12 +265,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
-        }
-
-        .audio-btn:hover {
-            transform: scale(1.1);
         }
 
         .audio-status {
@@ -336,32 +332,11 @@
         }
 
         @media (max-width: 768px) {
-            .portal-header h1 {
-                font-size: 2.2rem;
-            }
-
-            .circle-avatar {
-                width: 85px;
-                height: 85px;
-                font-size: 1.8rem;
-            }
-
-            .modal-card {
-                padding: 25px 20px;
-            }
-
-            .card-top-bar {
-                flex-direction: row;
-                align-items: flex-start;
-            }
-
-            .teacher-title-box h2 {
-                font-size: 2rem;
-            }
-
-            .bio-text {
-                font-size: 1rem;
-            }
+            .portal-header h1 { font-size: 2.2rem; }
+            .circle-avatar { width: 85px; height: 85px; font-size: 1.8rem; }
+            .modal-card { padding: 25px 20px; }
+            .teacher-title-box h2 { font-size: 2rem; }
+            .bio-text { font-size: 1rem; }
         }
     </style>
 </head>
@@ -375,27 +350,21 @@
             <p>Class 12 - 2026 Batch Teachers Tribute</p>
         </header>
 
-        <!-- HOME PAGE CIRCLES GRID -->
         <div class="teachers-circles-container" id="homeCirclesContainer"></div>
     </div>
 
-    <!-- POPUP MODAL CARD -->
+    <!-- MODAL -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-card" id="modalCard">
-
-            <!-- TOP CORNER BAR WITH BADGE & RIGHT SIDE CONTROLS -->
             <div class="card-top-bar">
                 <div class="subject-badge" id="subjectBadge">
                     <i class="fa-solid fa-star"></i> Tribute Gallery
                 </div>
 
                 <div class="corner-controls">
-                    <!-- 1. Close Button (X) AT TOP -->
                     <button class="close-btn" id="closeModalBtn" title="Close Card">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
-
-                    <!-- 2. Compact Play Music Button BELOW -->
                     <div class="audio-control-box">
                         <button class="audio-btn" id="audioToggleBtn" title="Play Music">
                             <i class="fa-solid fa-play"></i>
@@ -425,84 +394,39 @@
     <script>
         const teachersData = [
             {
-                id: "seema",
-                name: "Seema Ma'am",
-                role: "Senior Science Educator",
-                subject: "Biology",
-                icon: "fa-atom",
-                photoUrl: "",
-                badgeBg: "rgba(56, 189, 248, 0.15)",
-                badgeBorder: "#38bdf8",
-                badgeColor: "#38bdf8",
-                gradient: "linear-gradient(135deg, #38bdf8, #a855f7)",
-                glowColor: "rgba(56, 189, 248, 0.4)",
+                id: "seema", name: "Seema Ma'am", role: "Senior Science Educator", subject: "Biology",
+                icon: "fa-atom", photoUrl: "", badgeBg: "rgba(56, 189, 248, 0.15)", badgeBorder: "#38bdf8",
+                badgeColor: "#38bdf8", gradient: "linear-gradient(135deg, #38bdf8, #a855f7)", glowColor: "rgba(56, 189, 248, 0.4)",
                 bio: "Jaise Quantum Mechanics me energy levels electrons ko excite karte hain, waise hi aapka guidance humare brain ke hidden talent ko activate karta hai! Science ke complex concepts ko practical truth me badalne ke liye—Happy Guru Purnima Seema Ma'am!",
-                tags: ["Quantum Energy", "Reaction Catalyst", "Exothermic Inspiration"],
-                notes: [261.63, 329.63, 392.00, 523.25]
+                tags: ["Quantum Energy", "Reaction Catalyst", "Exothermic Inspiration"], notes: [261.63, 329.63, 392.00, 523.25]
             },
             {
-                id: "gaurav",
-                name: "Gaurav Sir",
-                role: "Accounts & Mathematics Master",
-                subject: "Commerce & Accountancy",
-                icon: "fa-calculator",
-                photoUrl: "",
-                badgeBg: "rgba(251, 191, 36, 0.15)",
-                badgeBorder: "#fbbf24",
-                badgeColor: "#fbbf24",
-                gradient: "linear-gradient(135deg, #fbbf24, #f97316)",
-                glowColor: "rgba(251, 191, 36, 0.4)",
+                id: "gaurav", name: "Gaurav Sir", role: "Accounts & Mathematics Master", subject: "Commerce & Accountancy",
+                icon: "fa-calculator", photoUrl: "", badgeBg: "rgba(251, 191, 36, 0.15)", badgeBorder: "#fbbf24",
+                badgeColor: "#fbbf24", gradient: "linear-gradient(135deg, #fbbf24, #f97316)", glowColor: "rgba(251, 191, 36, 0.4)",
                 bio: "Financial statements se lekar real life ki balance sheet tak, aapne sikhaya hai ki struggle agar 'Debit' ho toh success ka 'Credit' pakka hai! Complex mathematics ki tarah life ki problems ke derivatives ko simple banane aur humare future ka net profit badhane ke liye—Happy Guru Purnima Gaurav Sir!",
-                tags: ["Balance Sheet Master", "Debit-Credit Logic", "Net Profit Mentor"],
-                notes: [293.66, 369.99, 440.00, 587.33]
+                tags: ["Balance Sheet Master", "Debit-Credit Logic", "Net Profit Mentor"], notes: [293.66, 369.99, 440.00, 587.33]
             },
             {
-                id: "mithilesh",
-                name: "Mithilesh Ma'am",
-                role: "Class Teacher & English Specialist",
-                subject: "English Literature",
-                icon: "fa-book-open-reader",
-                photoUrl: "",
-                badgeBg: "rgba(52, 211, 153, 0.15)",
-                badgeBorder: "#34d399",
-                badgeColor: "#34d399",
-                gradient: "linear-gradient(135deg, #34d399, #10b981)",
-                glowColor: "rgba(52, 211, 153, 0.4)",
+                id: "mithilesh", name: "Mithilesh Ma'am", role: "Class Teacher & English Specialist", subject: "English Literature",
+                icon: "fa-book-open-reader", photoUrl: "", badgeBg: "rgba(52, 211, 153, 0.15)", badgeBorder: "#34d399",
+                badgeColor: "#34d399", gradient: "linear-gradient(135deg, #34d399, #10b981)", glowColor: "rgba(52, 211, 153, 0.4)",
                 bio: "You always guide us like a true mentor. Thank you for making learning so simple and fun for us. Wishing you a very Happy Guru Purnima, Mithilesh Ma'am!",
-                tags: ["Flawless Syntax", "Class Anchor", "Literary Mentor"],
-                notes: [329.63, 392.00, 493.88, 659.25]
+                tags: ["Flawless Syntax", "Class Anchor", "Literary Mentor"], notes: [329.63, 392.00, 493.88, 659.25]
             },
             {
-                id: "kusumlata",
-                name: "Kusumlata Ma'am",
-                role: "Hindi Literature Expert",
-                subject: "हिंदी साहित्य",
-                icon: "fa-feather-pointed",
-                photoUrl: "",
-                badgeBg: "rgba(244, 63, 94, 0.15)",
-                badgeBorder: "#f43f5e",
-                badgeColor: "#f43f5e",
-                gradient: "linear-gradient(135deg, #f43f5e, #fb7185)",
-                glowColor: "rgba(244, 63, 94, 0.4)",
+                id: "kusumlata", name: "Kusumlata Ma'am", role: "Hindi Literature Expert", subject: "हिंदी साहित्य",
+                icon: "fa-feather-pointed", photoUrl: "", badgeBg: "rgba(244, 63, 94, 0.15)", badgeBorder: "#f43f5e",
+                badgeColor: "#f43f5e", gradient: "linear-gradient(135deg, #f43f5e, #fb7185)", glowColor: "rgba(244, 63, 94, 0.4)",
                 bio: "आप सिर्फ हिंदी नहीं पढ़ातीं, बल्कि शब्दों से अपने विचार व्यक्त करना सिखाती हैं। कबीर के दोहों से लेकर व्याकरण तक, सब आसान बनाने के लिए धन्यवाद। गुरु पूर्णिमा की हार्दिक शुभकामनाएं कुसुमलता मैम!",
-                tags: ["साहित्य रस", "परिष्कृत विचार", "काव्य मार्गदर्शक"],
-                notes: [349.23, 440.00, 523.25, 698.46]
+                tags: ["साहित्य रस", "परिष्कृत विचार", "काव्य मार्गदर्शक"], notes: [349.23, 440.00, 523.25, 698.46]
             },
             {
-                id: "amit",
-                name: "Amit Sir",
-                role: "IT & Coding Lead",
-                subject: "Computer Science",
-                icon: "fa-code",
-                photoUrl: "",
-                badgeBg: "rgba(168, 85, 247, 0.15)",
-                badgeBorder: "#a855f7",
-                badgeColor: "#a855f7",
-                gradient: "linear-gradient(135deg, #a855f7, #6366f1)",
-                glowColor: "rgba(168, 85, 247, 0.4)",
+                id: "amit", name: "Amit Sir", role: "IT & Coding Lead", subject: "Computer Science",
+                icon: "fa-code", photoUrl: "", badgeBg: "rgba(168, 85, 247, 0.15)", badgeBorder: "#a855f7",
+                badgeColor: "#a855f7", gradient: "linear-gradient(135deg, #a855f7, #6366f1)", glowColor: "rgba(168, 85, 247, 0.4)",
                 bio: "Thank you for making technology simple, algorithms clear, and coding fun. Wishing a very Happy Guru Purnima, Amit Sir!",
-                tags: ["System Architect", "Algorithmic Logic", "Error Debugger"],
-                notes: [220.00, 277.18, 329.63, 440.00]
+                tags: ["System Architect", "Algorithmic Logic", "Error Debugger"], notes: [220.00, 277.18, 329.63, 440.00]
             }
         ];
 
@@ -512,7 +436,7 @@
         let audioCtx = null;
         let intervalId = null;
 
-        // Background Particles
+        // Optimized Particle Engine (Max 25 Particles)
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -528,22 +452,17 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.radius = Math.random() * 2 + 1;
+                this.radius = Math.random() * 1.8 + 1;
                 this.color = Math.random() > 0.5 ? '#38bdf8' : '#a855f7';
-                this.vx = (Math.random() - 0.5) * 0.8;
-                this.vy = (Math.random() - 0.5) * 0.8;
-                this.opacity = Math.random() * 0.7 + 0.3;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
             }
 
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
                 ctx.fillStyle = this.color;
-                ctx.globalAlpha = this.opacity;
-                ctx.shadowBlur = 10;
-                ctx.shadowColor = this.color;
                 ctx.fill();
-                ctx.globalAlpha = 1.0;
             }
 
             update() {
@@ -556,7 +475,7 @@
 
         function initParticles() {
             particles = [];
-            for (let i = 0; i < 60; i++) particles.push(new Particle());
+            for (let i = 0; i < 25; i++) particles.push(new Particle());
         }
 
         function animateParticles() {
@@ -567,11 +486,11 @@
                     const dy = particles[i].y - particles[j].y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
 
-                    if (dist < 120) {
+                    if (dist < 90) {
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = 'rgba(56, 189, 248, 0.1)';
+                        ctx.strokeStyle = 'rgba(56, 189, 248, 0.08)';
                         ctx.lineWidth = 1;
                         ctx.stroke();
                     }
@@ -584,7 +503,6 @@
         initParticles();
         animateParticles();
 
-        // Render Home Circles
         const homeCirclesContainer = document.getElementById('homeCirclesContainer');
         function renderHomeCircles() {
             homeCirclesContainer.innerHTML = '';
@@ -610,7 +528,6 @@
             });
         }
 
-        // Open Modal Function
         function openTeacherModal(index) {
             activeTeacherIndex = index;
             const teacher = teachersData[index];
@@ -618,7 +535,7 @@
             const modalOverlay = document.getElementById('modalOverlay');
             const modalCard = document.getElementById('modalCard');
             
-            modalCard.style.boxShadow = `0 20px 60px rgba(0,0,0,0.8), 0 0 80px ${teacher.glowColor}`;
+            modalCard.style.boxShadow = `0 20px 60px rgba(0,0,0,0.8), 0 0 50px ${teacher.glowColor}`;
             
             const subjectBadge = document.getElementById('subjectBadge');
             subjectBadge.style.background = teacher.badgeBg;
@@ -652,7 +569,7 @@
                 if (charIdx < teacher.bio.length) {
                     typewriterText.innerHTML += teacher.bio.charAt(charIdx);
                     charIdx++;
-                    typewriterTimeout = setTimeout(typeBio, 18);
+                    typewriterTimeout = setTimeout(typeBio, 12);
                 }
             }
             typeBio();
@@ -660,7 +577,6 @@
             modalOverlay.classList.add('active');
         }
 
-        // Close Modal
         function closeModal() {
             document.getElementById('modalOverlay').classList.remove('active');
             stopMelody();
@@ -671,7 +587,6 @@
             if (e.target.id === 'modalOverlay') closeModal();
         });
 
-        // Audio Logic
         function playTone(freq, duration) {
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             if (audioCtx.state === 'suspended') audioCtx.resume();
